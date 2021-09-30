@@ -19,9 +19,5 @@ type Service interface {
 
 type AsyncService interface {
 	Nameabe
-	Run(context.Context) (chan bool,error)
+	Run(context.Context) (chan bool, error)
 }
-
-
-
-

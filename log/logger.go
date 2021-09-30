@@ -1,149 +1,98 @@
 package log
 
-import (
-	"io"
-	"time"
-)
-
-const (
-	panicMessage = "logger must be set"
-)
-
-type Level uint8
-
-const (
-	NoLevel Level = iota
-	LevelTrace
-	LevelDebug
-	LevelInfo
-	LevelWarn
-	LevelError
-	LevelFatal
-	LevelPanic
-	Disabled
-)
-
 var (
-	defaultLogger Logger = emptyLogger{}
+	// DefaultLogger logger implementation to use
+	DefaultLogger Logger
 )
 
-type LevelLogger interface {
-	Trace(string)
-	Debug(string)
-	Info(string)
-	Warn(string)
-	Error(string)
-	Fatal(string)
-	Panic(string)
-
-	Write([]byte) (int, error)
+type LoggerOption interface {
+	Update(Logger) Logger
 }
 
-type Event interface {
-	LevelLogger
-	Int(string, int) Event
-	Str(string, string) Event
-	Float32(string, float32) Event
-	Float64(string, float64) Event
-	Time(string, time.Time) Event
-	Logger() Logger
+type LoggerOptionFunc func(Logger) Logger
+
+func (l LoggerOptionFunc) Update(lo Logger) Logger {
+	return l(lo)
 }
 
 type Logger interface {
-	LevelLogger
-	With() Event
-
-	WithLevel(Level) Logger
-	WithOutput(io.Writer) Logger
-	HasLevel(Level) bool
+	// Level returns the highest level that is enabled
 	Level() Level
+	// HasLevel checks if the level is enabled
+	HasLevel(Level) bool
+	// With create a new Logger with opts informed
+	With(...LoggerOption) Logger
+	// NewFieldBuilder create a new FieldBuilder
+	NewFieldBuilder() FieldBuilder
+
+	// Log send a log message with level and fields if the level is enabled
+	Log(Level, FieldBuilder)
+
+	// Trc send a log message with level trace and fields
+	Trc(FieldBuilder)
+	// Trace send a log message with level trace and message
+	Trace(string)
+	// Tracef send a log message with level trace and message formatted
+	Tracef(string, ...interface{})
+
+	// Dbg send a log message with level debug and fields
+	Dbg(FieldBuilder)
+	// Debug send a log message with level debug and message
+	Debug(string)
+	// Debugf send a log message with level debug and message formatted
+	Debugf(string, ...interface{})
+
+	// Inf send a log message with level info and fields
+	Inf(FieldBuilder)
+	// Info send a log message with level info and message
+	Info(string)
+	// Infof send a log message with level info and message formatted
+	Infof(string, ...interface{})
+
+	// Wrn send a log message with level warning and fields
+	Wrn(FieldBuilder)
+	// Warn send a log message with level warning and message
+	Warn(string)
+	// Warnf send a log message with level warning and message formatted
+	Warnf(string, ...interface{})
+
+	// Err send a log message with level error and fields
+	Err(FieldBuilder)
+	// Error send a log message with level error, message and error
+	Error(string, error)
+	// Errof send a log message with level error and message formatted
+	Errorf(string, ...interface{})
+
+	// Ftl send a log message with level fatal and fields
+	Ftl(FieldBuilder)
+	// Fatal send a log message with level fatal and message
+	Fatal(string)
+	// Fatalf send a log message with level fatal and message formatted
+	Fatalf(string, ...interface{})
+
+	// Pnc send a log message with level panic and fields
+	Pnc(FieldBuilder)
+	// Panic send a log message with level panic and message
+	Panic(string)
+	// Panicf send a log message with level panic and message formatted
+	Panicf(string, ...interface{})
 }
 
-type emptyLogger struct {
+func With(opts ...LoggerOption) Logger {
+	return DefaultLogger.With(opts...)
 }
 
-func (l emptyLogger) WithLevel(Level) Logger      { panic(panicMessage) }
-func (l emptyLogger) WithOutput(io.Writer) Logger { panic(panicMessage) }
-func (l emptyLogger) With() Event                 { panic(panicMessage) }
-func (l emptyLogger) HasLevel(Level) bool         { panic(panicMessage) }
-func (l emptyLogger) Trace(msg string)            { panic(panicMessage) }
-func (l emptyLogger) Debug(msg string)            { panic(panicMessage) }
-func (l emptyLogger) Info(msg string)             { panic(panicMessage) }
-func (l emptyLogger) Warn(msg string)             { panic(panicMessage) }
-func (l emptyLogger) Error(msg string)            { panic(panicMessage) }
-func (l emptyLogger) Fatal(msg string)            { panic(panicMessage) }
-func (l emptyLogger) Panic(msg string)            { panic(panicMessage) }
-func (l emptyLogger) Write([]byte) (int, error)   { panic(panicMessage) }
-func (l emptyLogger) Level() Level                { panic(panicMessage) }
-
-func SetDefaultLogger(l Logger) {
-	defaultLogger = l
+// Inf send a log message using DefaultLogger with level info and fields
+func Inf(fieldBuilder FieldBuilder) {
+	DefaultLogger.Inf(fieldBuilder)
 }
 
-func Str(key, value string) Event {
-	return defaultLogger.With().Str(key, value)
-}
-
-func Int(key string, value int) Event {
-	return defaultLogger.With().Int(key, value)
-}
-
-func Trace(msg string) {
-	defaultLogger.Trace(msg)
-}
-
-func Debug(msg string) {
-	defaultLogger.Debug(msg)
-}
-
+// Info send a log message using DefaultLogger with level info and message
 func Info(msg string) {
-	defaultLogger.Info(msg)
+	DefaultLogger.Info(msg)
 }
 
-func Warn(msg string) {
-	defaultLogger.Warn(msg)
-}
-
-func Error(msg string) {
-	defaultLogger.Error(msg)
-}
-
-func Fatal(msg string) {
-	defaultLogger.Fatal(msg)
-}
-
-func Panic(msg string) {
-	defaultLogger.Panic(msg)
-}
-
-func With() Event {
-	return defaultLogger.With()
-}
-
-func SetLevel(level Level) {
-	defaultLogger = WithLevel(level)
-}
-
-func WithLevel(level Level) Logger {
-	return defaultLogger.WithLevel(level)
-}
-
-func HasLevel(level Level) bool {
-	return defaultLogger.HasLevel(level)
-}
-
-func HasTrace() bool {
-	return HasLevel(LevelTrace)
-}
-
-func HasDebug() bool {
-	return HasLevel(LevelDebug)
-}
-
-func HasInfo() bool {
-	return HasLevel(LevelInfo)
-}
-
-func HasError() bool {
-	return HasLevel(LevelError)
+// Infof send a log message using DefaultLogger with level info and message formatted
+func Infof(format string, args ...interface{}) {
+	DefaultLogger.Infof(format, args...)
 }

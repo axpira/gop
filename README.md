@@ -1,4 +1,4 @@
-[![Go Reference](https://pkg.go.dev/badge/https//github.com/axpira/gop.svg)](https://pkg.go.dev/https//github.com/axpira/gop)
+[![Go Reference](https://pkg.go.dev/badge/github.com/axpira/gop.svg)](https://pkg.go.dev/github.com/axpira/gop)
 [![Go Report Card](https://goreportcard.com/badge/github.com/axpira/gop)](https://goreportcard.com/report/github.com/axpira/gop)
 
 # gop

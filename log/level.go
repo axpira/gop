@@ -3,7 +3,7 @@ package log
 type Level uint8
 
 const (
-	DisabledLevel Level = iota
+	NoLevel Level = iota
 	TraceLevel
 	DebugLevel
 	InfoLevel
@@ -11,5 +11,5 @@ const (
 	ErrorLevel
 	FatalLevel
 	PanicLevel
-	NoLevel
+	DisabledLevel
 )

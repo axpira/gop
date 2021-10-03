@@ -1,7 +1,6 @@
 package log
 
 import (
-	"context"
 	"fmt"
 	"time"
 )
@@ -16,9 +15,6 @@ type LogMarshaler interface {
 // Each method adds a key with the value as type
 type FieldBuilder interface {
 	LoggerOption
-
-	// Ctx adds a context to the FieldBuilder
-	Ctx(context.Context) FieldBuilder
 
 	// Str adds the field key with a value as a string to the FieldBuilder
 	Str(string, string) FieldBuilder

@@ -14,7 +14,7 @@ The big advantage you can use this interfaces without need to think the implemen
 You must choose one implementation, this is some examples:
 
 - "github.com/axpira/goplogjson"
-_ "github.com/axpira/goplogadapter/logrus"
+- "github.com/axpira/goplogadapter/logrus"
 
 
 And to use:

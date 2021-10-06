@@ -76,8 +76,16 @@ type Logger interface {
 	Panic(string)
 	// Panicf send a log message with level panic and message formatted
 	Panicf(string, ...interface{})
+
+	Print(...interface{})
+	Printf(string, ...interface{})
+	Println(...interface{})
+
+	// Write implements io.Writer
+	Write([]byte) (int, error)
 }
 
+// With create a new Logger with opts updated
 func With(opts ...LoggerOption) Logger {
 	return DefaultLogger.With(opts...)
 }

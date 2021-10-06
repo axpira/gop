@@ -14,7 +14,8 @@ The big advantage you can use this interfaces without need to think the implemen
 You must choose one implementation, this is some examples:
 
 - "github.com/axpira/goplogjson"
-- "github.com/axpira/gopadapterlr"
+_ "github.com/axpira/goplogadapter/logrus"
+
 
 And to use:
 
@@ -26,8 +27,8 @@ import (
 
 	"github.com/axpira/gop/log"
 	_ "github.com/axpira/goplogjson"
-	// _ "github.com/axpira/gopadapterlr" // uncommenting this line and commenting the above line
-                                        // the Logrus will be use as default implementation
+	// _ "github.com/axpira/goplogadapter/logrus" // uncommenting this line and commenting the above line
+                                                // the Logrus will be use as default implementation
 )
 
 func main() {

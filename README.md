@@ -13,8 +13,8 @@ The big advantage you can use this interfaces without need to think the implemen
 
 You must choose one implementation, this is some examples:
 
-- "github.com/axpira/goplogjson"
-- "github.com/axpira/goplogadapter/logrus"
+- [goplogjson]("https://github.com/axpira/goplogjson")
+- [logrus]("https://github.com/axpira/goplogadapter/logrus")
 
 
 And to use:
@@ -51,12 +51,11 @@ func main() {
 	// out: {"msg":"Hello World","level":"info","str_field":"hello","int_field":42,"time":"2021-09-29T07:49:29-03:00"}
 
 	l.Info("Hello World")
-  // out: {"msg":"Hello World","level":"info","str_field":"hello","int_field":42,"time":"2021-09-29T08:00:48-03:00"}
+	// out: {"msg":"Hello World","level":"info","str_field":"hello","int_field":42,"time":"2021-09-29T08:00:48-03:00"}
 	l.Inf(log.
 		Bool("another_field", true).
 		Msg("Hello World"),
 	)
 	// out: {"another_field":true,"msg":"Hello World","level":"info","str_field":"hello","int_field":42,"time":"2021-09-29T07:49:29-03:00"}
-
 }
 ```

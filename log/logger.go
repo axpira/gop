@@ -90,6 +90,11 @@ func With(opts ...LoggerOption) Logger {
 	return DefaultLogger.With(opts...)
 }
 
+// Log send a log message using DefaultLogger with sent level and fields
+func Log(level Level, fieldBuilder FieldBuilder) {
+	DefaultLogger.Log(level, fieldBuilder)
+}
+
 // Trc send a log message using DefaultLogger with level trace and fields
 func Trc(fieldBuilder FieldBuilder) {
 	DefaultLogger.Trc(fieldBuilder)

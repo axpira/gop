@@ -90,6 +90,21 @@ func With(opts ...LoggerOption) Logger {
 	return DefaultLogger.With(opts...)
 }
 
+// Trc send a log message using DefaultLogger with level trace and fields
+func Trc(fieldBuilder FieldBuilder) {
+	DefaultLogger.Trc(fieldBuilder)
+}
+
+// Trace send a log message using DefaultLogger with level info and message
+func Trace(msg string) {
+	DefaultLogger.Trace(msg)
+}
+
+// Tracef send a log message using DefaultLogger with level info and message formatted
+func Tracef(format string, args ...interface{}) {
+	DefaultLogger.Tracef(format, args...)
+}
+
 // Inf send a log message using DefaultLogger with level info and fields
 func Inf(fieldBuilder FieldBuilder) {
 	DefaultLogger.Inf(fieldBuilder)
@@ -103,4 +118,19 @@ func Info(msg string) {
 // Infof send a log message using DefaultLogger with level info and message formatted
 func Infof(format string, args ...interface{}) {
 	DefaultLogger.Infof(format, args...)
+}
+
+// Err send a log message using DefaultLogger with level error and fields
+func Err(fieldBuilder FieldBuilder) {
+	DefaultLogger.Err(fieldBuilder)
+}
+
+// Error send a log message using DefaultLogger with level error and message
+func Error(msg string, err error) {
+	DefaultLogger.Error(msg, err)
+}
+
+// Errorf send a log message using DefaultLogger with level error and message formatted
+func Errorf(format string, args ...interface{}) {
+	DefaultLogger.Errorf(format, args...)
 }

@@ -138,18 +138,6 @@ func Dur(key string, value time.Duration) FieldBuilder {
 	return DefaultLogger.NewFieldBuilder().Dur(key, value)
 }
 
-// Error starts a new FieldBuilder using DefaultLogger,
-// with the field key with value as a error to FieldBuilder
-func Error(key string, value error) FieldBuilder {
-	return DefaultLogger.NewFieldBuilder().Error(key, value)
-}
-
-// Err starts a new FieldBuilder using DefaultLogger,
-// with the value as a error to FieldBuilder
-func Err(value error) FieldBuilder {
-	return DefaultLogger.NewFieldBuilder().Err(value)
-}
-
 // Msg starts a new FieldBuilder using DefaultLogger,
 // with the msg as a message to FieldBuilder
 func Msg(msg string) FieldBuilder {

@@ -4,13 +4,6 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/axpira/gop)](https://goreportcard.com/report/github.com/axpira/gop)
 
 <!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -89,7 +82,11 @@ The implementation will format the output, but you can change anytime implementa
 
 For now:
 - [goplogjson](https://github.com/axpira/goplogjson)
+Fast and with zero allocation
 - [adapter](https://github.com/axpira/goplogadapter)
+Creates a map[string]interface{} with all fields,
+and you can implements just one func to create a logger.
+Has Logrus adadapter and Json using Golang encoding
 
 
 ### Simple Log

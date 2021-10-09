@@ -33,9 +33,9 @@ type FieldBuilder interface {
 	// Msgf adds the message for a log, using formatter, to the FieldBuilder.
 	Msgf(string, ...interface{}) FieldBuilder
 
-	// Any adds the field key with value as a interface to the FieldBuilder.
+	// Interface adds the field key with value as a interface to the FieldBuilder.
 	// This method will find the type of value to add in the log
-	Any(string, interface{}) FieldBuilder
+	Interface(string, interface{}) FieldBuilder
 	// Marshal adds the field key with value as a interface to the FieldBuilder.
 	// This method will try to Marshal as LogMarshaler interface or
 	//  will marshal as expected by implementation

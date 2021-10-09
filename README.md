@@ -108,10 +108,11 @@ package main
 
 import (
 	"github.com/axpira/gop/log"
+	"github.com/axpira/gop/log/field"
 )
 
 func main() {
-	log.Inf(log.
+	log.Inf(field.
 		Str("str_field", "hello").
 		Int("int_field", 42).
 		Msg("Hello World"),
@@ -142,12 +143,13 @@ import (
 	"errors"
 
 	"github.com/axpira/gop/log"
+	"github.com/axpira/gop/log/field"
 )
 
 func main() {
 	log.Log(
 		log.ErrorLevel,
-		log.Msg("Hello World").Err(errors.New("unknown error")),
+		field.Msg("Hello World").Err(errors.New("unknown error")),
 	)
 ```
 
@@ -159,10 +161,11 @@ import (
 	"errors"
 
 	"github.com/axpira/gop/log"
+	"github.com/axpira/gop/log/field"
 )
 
 func main() {
-	l := log.With(log.Str("mykey", "value"))
+	l := log.With(field.Str("mykey", "value"))
 	l.Trace("Hello World")
 ```
 

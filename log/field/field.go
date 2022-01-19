@@ -6,6 +6,12 @@ import (
 	"github.com/axpira/gop/log"
 )
 
+// Str starts a new log.FieldBuilder using DefaultLogger,
+// with the field key with value as a string to log.FieldBuilder
+func Str(key string, value string) log.FieldBuilder {
+	return log.DefaultLogger.NewFieldBuilder().Str(key, value)
+}
+
 // Int starts a new log.FieldBuilder using DefaultLogger,
 // with the field key with value as a int to log.FieldBuilder
 func Int(key string, value int) log.FieldBuilder {

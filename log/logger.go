@@ -1,5 +1,7 @@
 package log
 
+import "context"
+
 var (
 	// DefaultLogger logger implementation to use
 	DefaultLogger Logger
@@ -83,6 +85,12 @@ type Logger interface {
 
 	// Write implements io.Writer
 	Write([]byte) (int, error)
+
+	// FromCtx restore a logger from context
+	FromCtx(context.Context) Logger
+
+	// ToCtx store a logger in context
+	ToCtx(context.Context) context.Context
 }
 
 // With create a new Logger with opts updated
@@ -138,4 +146,9 @@ func Error(msg string, err error) {
 // Errorf send a log message using DefaultLogger with level error and message formatted
 func Errorf(format string, args ...interface{}) {
 	DefaultLogger.Errorf(format, args...)
+}
+
+// FromCtx restore Logger from a context
+func FromCtx(ctx context.Context) Logger {
+	return DefaultLogger.FromCtx(ctx)
 }
